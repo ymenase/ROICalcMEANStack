@@ -14,6 +14,29 @@
  //Bind connection to error event (to get notification of connection errors)
  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//Define Schema
+var Schema = mongoose.Schema;
+
+var accountingSchema = new Schema({
+
+  revenue: {
+    name : String,
+    oneTimePmt: Number,
+    monthlyPmt: Number
+  },
+
+  expenses: {
+    name: String,
+    oneTimePmt: Number,
+    monthlyPmt: Number
+  }
+
+})
+
+//Compile model from Schema
+var accountingModel = mongoose.model('accountingModel', accountingSchema);
+
+
 var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
