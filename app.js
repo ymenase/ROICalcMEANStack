@@ -36,6 +36,43 @@ var accountingSchema = new Schema({
 //Compile model from Schema
 var accountingModel = mongoose.model('accountingModel', accountingSchema);
 
+var testInstance = new accountingModel({
+  revenue: {
+    name: 'groceries',
+    oneTimePmt: 500,
+    monthlyPmt: 20
+  }
+});
+
+testInstance.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+});
+
+var testInstance2 = new accountingModel({
+  revenue: {
+    name: 'poo',
+    oneTimePmt: 50,
+    monthlyPmt: 0
+  }
+});
+
+testInstance2.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+});
+
+
+
+var testPrint = accountingModel.find({"revenue" : {"name" : "poo", "oneTimePmt" : "50", "monthlyPmt" : "0"} }, "revenue.name", function (err, athletes) {
+  if (err) return handleError(err);
+  // 'athletes' contains the list of athletes that match the criteria.
+});
+
+console.log("********************************\n**************\n" + testPrint);
+
+
+
 
 var express = require('express'),
   bodyParser = require('body-parser'),
